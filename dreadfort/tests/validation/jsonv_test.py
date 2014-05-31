@@ -3,7 +3,7 @@ import unittest
 from mock import MagicMock
 
 from dreadfort.validation.jsonv import (JsonSchemaValidatorFactory,
-                                       DirectorySchemaLoader)
+                                        DirectorySchemaLoader)
 
 
 class WhenLoading(unittest.TestCase):

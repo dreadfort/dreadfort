@@ -47,6 +47,7 @@ class WhenTestingWorkerObject(unittest.TestCase):
 
 
 class WhenTestingSystemInfoObject(unittest.TestCase):
+
     def setUp(self):
         self.system_info = SystemInfo(
             cpu_cores='4',

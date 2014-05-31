@@ -20,6 +20,7 @@ def suite():
 
 
 class WhenTestingCorrelationPipeline(unittest.TestCase):
+
     def setUp(self):
         self.tenant_id = '5164b8f4-16fb-4376-9d29-8a6cbaa02fa9'
         self.message_token = 'ffe7104e-8d93-47dc-a49a-8fb0d39e5192'
@@ -305,7 +306,7 @@ class WhenTestingCorrelationPipeline(unittest.TestCase):
         add_correlation_info_to_message_func.assert_called_once_with(
             self.tenant, self.src_msg)
 
-    #Tests for _add_correlation_info_to_message
+    # Tests for _add_correlation_info_to_message
     def test_add_correlation_info_to_message(self):
         route_message_func = MagicMock()
         with patch('dreadfort.correlation.correlator.sinks.route_message',

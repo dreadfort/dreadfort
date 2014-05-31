@@ -4,6 +4,7 @@ from dreadfort.sinks import DEFAULT_SINK
 
 
 class EventProducer(object):
+
     """
     An event producer is a nicer way of describing a parsing template
     for a producer of events. Event producer definitions should be
@@ -36,6 +37,7 @@ class EventProducer(object):
 
 
 class Token(object):
+
     """
     Token is an object used to authenticate messages from a tenant.
     """
@@ -86,6 +88,7 @@ class Token(object):
 
 
 class Tenant(object):
+
     """
     Tenants are users of the environments being monitored for
     application events.
@@ -126,7 +129,7 @@ def load_tenant_from_dict(tenant_dict):
     """
     Create a Tenant Object from a dictionary
     """
-    #Create a list of EventProducer objects from the dictionary
+    # Create a list of EventProducer objects from the dictionary
     event_producers = [
         EventProducer(
             e['id'], e['name'], e['pattern'],
@@ -141,7 +144,7 @@ def load_tenant_from_dict(tenant_dict):
     if "_id" in tenant_dict.keys():
         _id = tenant_dict['_id']
 
-    #Return the tenant object
+    # Return the tenant object
     return Tenant(
         tenant_dict['tenant_id'], token,
         event_producers=event_producers,

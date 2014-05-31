@@ -95,6 +95,7 @@ class WhenTestingTokenObject(unittest.TestCase):
 
 
 class WhenTestingTenantObject(unittest.TestCase):
+
     def setUp(self):
         self.test_token = Token('89c38542-0c78-41f1-bcd2-5226189ccab9',
                                 '89c38542-0c78-41f1-bcd2-5226189ddab1',

@@ -17,10 +17,10 @@ class PublishMessageResource(ApiResource):
         by the local cache or by a call to this workers coordinator.
         """
 
-        #Validate the tenant's JSON event log data as valid JSON.
+        # Validate the tenant's JSON event log data as valid JSON.
         message = validated_body['log_message']
 
-        #read message token from header
+        # read message token from header
         message_token = req.get_header(MESSAGE_TOKEN, required=True)
 
         # Queue the message for correlation

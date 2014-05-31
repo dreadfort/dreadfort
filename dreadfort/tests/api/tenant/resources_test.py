@@ -41,6 +41,7 @@ def suite():
 
 
 class TenantApiTestBase(testing.TestBase):
+
     def before(self):
         self.db_handler = MagicMock()
         self.req = MagicMock()
@@ -75,6 +76,7 @@ class TenantApiTestBase(testing.TestBase):
 
 
 class TestingTenantResourceOnPost(TenantApiTestBase):
+
     def _set_resource(self):
         self.resource = TenantResource()
         self.test_route = '/v1/tenant'
@@ -135,6 +137,7 @@ class TestingTenantResourceOnPost(TenantApiTestBase):
 
 
 class TestingUserResourceOnGet(TenantApiTestBase):
+
     def _set_resource(self):
         self.resource = UserResource()
         self.test_route = '/v1/tenant/{tenant_id}'

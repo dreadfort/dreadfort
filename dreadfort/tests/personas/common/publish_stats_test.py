@@ -20,6 +20,7 @@ def suite():
 
 
 class WhenTestingPublishStats(unittest.TestCase):
+
     def setUp(self):
         self.conf = MagicMock()
         self.conf.status_update.worker_status_interval = 60

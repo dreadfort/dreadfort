@@ -89,7 +89,7 @@ def correlate_http_message(tenant_id, message_token, message):
     the task to fail.
     """
     try:
-        #enter the pipeline by beginning mesage validation
+        # enter the pipeline by beginning mesage validation
         _validate_token_from_cache(tenant_id, message_token, message)
 
     # Catch all CoordinationCommunicationErrors and retry the task.
@@ -142,8 +142,8 @@ def _format_message_cee(message):
         tenant_id = dreadfort_sd['tenant']
         message_token = dreadfort_sd['token']
 
-    #if there is a key error then the syslog message did
-    #not contain necessary credential information
+    # if there is a key error then the syslog message did
+    # not contain necessary credential information
     except KeyError:
         error_message = 'tenant_id or message token not provided'
         _LOG.debug('Message validation failed: {0}'.format(error_message))
@@ -162,7 +162,7 @@ def _format_message_cee(message):
     cee_message['msg'] = message.get('MESSAGE', '-')
     cee_message['native'] = message.get('_SDATA', {})
 
-    #send the new cee_message to be validated
+    # send the new cee_message to be validated
     _validate_token_from_cache(tenant_id, message_token, cee_message)
 
 
@@ -179,7 +179,7 @@ def _validate_token_from_cache(tenant_id, message_token, message):
     token = token_cache.get_token(tenant_id)
 
     if token:
-        #validate token
+        # validate token
         if not token.validate_token(message_token):
             raise errors.MessageAuthenticationError(
                 'Message not authenticated, check your tenant id '
@@ -200,7 +200,7 @@ def _get_tenant_from_cache(tenant_id, message_token, message):
     retrieved from coordinator
     """
     tenant_cache = cache_handler.TenantCache()
-    #get the tenant object from cache
+    # get the tenant object from cache
     tenant = tenant_cache.get_tenant(tenant_id)
 
     if not tenant:
@@ -258,7 +258,7 @@ def _get_tenant_from_coordinator(tenant_id, message_token, message):
     if resp.status_code == httplib.OK:
         response_body = resp.json()
 
-        #load new tenant data from response body
+        # load new tenant data from response body
         tenant = tenant_util.load_tenant_from_dict(response_body['tenant'])
 
         # update the cache with new tenant info
@@ -272,7 +272,7 @@ def _get_tenant_from_coordinator(tenant_id, message_token, message):
         _LOG.debug(error_message)
         raise errors.ResourceNotFoundError(error_message)
     else:
-        #coordinator responds, but coordinator datasink could be unreachable
+        # coordinator responds, but coordinator datasink could be unreachable
         raise errors.CoordinatorCommunicationError
 
 
@@ -282,15 +282,15 @@ def _add_correlation_info_to_message(tenant, message):
     adding a dictionary named "dreadfort" that contains tenant specific
     information used in processing the message.
     """
-    #match the producer by the message pname
+    # match the producer by the message pname
     producer = tenant_util.find_event_producer(tenant,
                                                producer_name=message['pname'])
 
-    #if the producer is not found, create a default producer
+    # if the producer is not found, create a default producer
     if not producer:
         producer = EventProducer(_id=None, name="default", pattern="default")
 
-    #create correlation dictionary
+    # create correlation dictionary
     correlation_dict = {
         'tenant_name': tenant.tenant_name,
         'ep_id': producer.get_id(),
@@ -302,7 +302,7 @@ def _add_correlation_info_to_message(tenant, message):
         "destinations": dict()
     }
 
-    #configure sink dispatch
+    # configure sink dispatch
     for sink in producer.sinks:
         correlation_dict["destinations"][sink] = {'transaction_id': None,
                                                   'transaction_time': None}
@@ -311,7 +311,7 @@ def _add_correlation_info_to_message(tenant, message):
     # data so that the client's token is scrubbed form the message.
     message['native'].pop('dreadfort', None)
     message.update({'dreadfort': {'tenant': tenant.tenant_id,
-                                 'correlation': correlation_dict}})
+                                  'correlation': correlation_dict}})
 
     # If the message data indicates that the message has normalization rules
     # that apply, Queue the message for normalization processing
@@ -331,7 +331,7 @@ def _save_tenant_to_cache(tenant_id, tenant):
     tenant_cache = cache_handler.TenantCache()
     token_cache = cache_handler.TokenCache()
 
-    #save token and tenant information to cache
+    # save token and tenant information to cache
     token_cache.set_token(tenant_id, tenant.token)
     tenant_cache.set_tenant(tenant)
 

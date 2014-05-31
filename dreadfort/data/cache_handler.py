@@ -51,6 +51,7 @@ CACHE_TOKEN = conf.cache.cache_token
 
 
 class Cache(object):
+
     def __init__(self):
         self.cache = NativeProxy()
 
@@ -59,6 +60,7 @@ class Cache(object):
 
 
 class ConfigCache(Cache):
+
     def clear(self):
         self.cache.cache_clear(CACHE_CONFIG)
 
@@ -88,6 +90,7 @@ class ConfigCache(Cache):
 
 
 class TenantCache(Cache):
+
     def clear(self):
         self.cache.cache_clear(CACHE_TENANT)
 
@@ -116,6 +119,7 @@ class TenantCache(Cache):
 
 
 class TokenCache(Cache):
+
     def clear(self):
         self.cache.cache_clear(CACHE_TOKEN)
 

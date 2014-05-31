@@ -21,6 +21,7 @@ def suite():
 
 
 class WhenTestingWorkerOnPut(testing.TestBase):
+
     def before(self):
         self.status = 'online'
         self.hostname = 'worker01'
@@ -67,7 +68,9 @@ class WhenTestingWorkerOnPut(testing.TestBase):
         self.api.add_route(self.test_route, self.resource)
 
     def test_returns_400_body_validation(self):
-        with patch('dreadfort.data.model.worker_util.save_worker', MagicMock()):
+        with patch(
+                'dreadfort.data.model.worker_util.save_worker',
+                MagicMock()):
             self.simulate_request(
                 self.test_route,
                 method='PUT',
@@ -135,6 +138,7 @@ class WhenTestingWorkerOnPut(testing.TestBase):
 
 
 class WhenTestingWorkersStatus(unittest.TestCase):
+
     def setUp(self):
         self.req = MagicMock()
         self.resp = MagicMock()
@@ -161,6 +165,7 @@ class WhenTestingWorkersStatus(unittest.TestCase):
 
 
 class WhenTestingWorkerStatus(unittest.TestCase):
+
     def setUp(self):
         self.req = MagicMock()
         self.resp = MagicMock()

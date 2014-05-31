@@ -28,6 +28,7 @@ from dreadfort.openstack.common.gettextutils import _  # noqa
 
 
 class save_and_reraise_exception(object):
+
     """Save current exception, run some code and then re-raise.
 
     In some cases the exception context can be cleared, resulting in None
@@ -50,6 +51,7 @@ class save_and_reraise_exception(object):
             if not should_be_reraised:
                 ctxt.reraise = False
     """
+
     def __init__(self):
         self.reraise = True
 

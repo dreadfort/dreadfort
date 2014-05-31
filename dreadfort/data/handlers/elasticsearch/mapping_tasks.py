@@ -41,10 +41,10 @@ def create_ttl_mapping(tenant_id, producer_pattern):
         create_ttl_mapping.retry()
 
 
-#the default ttl time for an index if one is not specified in the document
+# the default ttl time for an index if one is not specified in the document
 DEFAULT_TTL = 7776000000
 
-#es mapping for enabling TTL
+# es mapping for enabling TTL
 TTL_MAPPING = {
     "_ttl": {
         "enabled": True,
@@ -52,7 +52,7 @@ TTL_MAPPING = {
     }
 }
 
-#default es mapping for log messages
+# default es mapping for log messages
 DEFAULT_MAPPING = {
     "mappings": {
         "default": {

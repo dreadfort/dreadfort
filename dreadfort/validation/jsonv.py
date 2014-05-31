@@ -9,7 +9,7 @@ class DirectorySchemaLoader(SchemaLoader):
 
     def __init__(self, *directories):
         self.directories = [
-            d[0:len(d)-1] if d.endswith(os.sep) else d for d in directories]
+            d[0:len(d) - 1] if d.endswith(os.sep) else d for d in directories]
 
     def load_schema(self, schema_ref):
         for directory in self.directories:

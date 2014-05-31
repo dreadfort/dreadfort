@@ -13,7 +13,7 @@ class CorrelationInputServer(transport.ZeroMQInputServer):
         msg = self._get_msg()
 
         try:
-            #Queue the message for correlation
+            # Queue the message for correlation
             correlator.correlate_syslog_message.delay(msg)
         except Exception:
             _LOG.exception('unable to place persist_message task on queue')

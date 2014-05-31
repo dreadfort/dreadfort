@@ -28,6 +28,7 @@ def suite():
 
 
 class WhenTestingBaseCache(unittest.TestCase):
+
     def test_cache_raises_not_implemented(self):
         cache = Cache()
         with self.assertRaises(NotImplementedError):
@@ -35,6 +36,7 @@ class WhenTestingBaseCache(unittest.TestCase):
 
 
 class WhenTestingConfigCache(unittest.TestCase):
+
     def setUp(self):
         self.cache_clear = MagicMock()
         self.cache_true = MagicMock(return_value=True)
@@ -119,6 +121,7 @@ class WhenTestingConfigCache(unittest.TestCase):
 
 
 class WhenTestingTenantCache(unittest.TestCase):
+
     def setUp(self):
         self.cache_clear = MagicMock()
         self.cache_true = MagicMock(return_value=True)
@@ -204,6 +207,7 @@ class WhenTestingTenantCache(unittest.TestCase):
 
 
 class WhenTestingTokenCache(unittest.TestCase):
+
     def setUp(self):
         self.cache_clear = MagicMock()
         self.cache_true = MagicMock(return_value=True)

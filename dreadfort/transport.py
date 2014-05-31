@@ -39,6 +39,7 @@ _CONF = config.get_config()
 
 
 class ZeroMQReceiver(object):
+
     """
     ZeroMQReceiver allows for messages to be received by pulling
     messages over a zmq socket from an upstream host.  This client may
@@ -101,7 +102,7 @@ def new_zmq_receiver():
     host:ports listed in zmq_upstream_hosts from dreadfort config.
     """
 
-    #build a list of (host, port) tuples from config
+    # build a list of (host, port) tuples from config
     upstream_hosts = [
         (host_port_str.split(':'))
         for host_port_str in _CONF.zmq_in.zmq_upstream_hosts
@@ -111,6 +112,7 @@ def new_zmq_receiver():
 
 
 class ZeroMQInputServer(object):
+
     """
     ZeroMQInputServer is a base class creates an IO Loop that continues
     to pull messages through a ZeroMQReceiver for processing.
@@ -168,6 +170,7 @@ class ZeroMQInputServer(object):
 
 
 class ZeroMQCaster(object):
+
     """
     ZeroMQCaster allows for messages to be sent downstream by pushing
     messages over a zmq socket to downstream clients.  If multiple clients

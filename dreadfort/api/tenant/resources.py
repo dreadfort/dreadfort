@@ -49,6 +49,7 @@ def _token_time_limit_not_reached():
 
 
 class TenantResource(api.ApiResource):
+
     """
     The tenant Resource allows for the creation of new tenants in the system.
     """
@@ -65,7 +66,7 @@ class TenantResource(api.ApiResource):
 
         tenant_name = body.get('tenant_name', tenant_id)
 
-        #validate that tenant does not already exists
+        # validate that tenant does not already exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
         if tenant:
             api.abort(falcon.HTTP_400, 'Tenant with tenant_id {0} '
@@ -78,6 +79,7 @@ class TenantResource(api.ApiResource):
 
 
 class UserResource(api.ApiResource):
+
     """
     User Resource allows for retrieval of existing tenants.
     """
@@ -98,6 +100,7 @@ class UserResource(api.ApiResource):
 
 
 class EventProducersResource(api.ApiResource):
+
     """
     The Event Producer resource allows for the creation of new Event Producers
     and retrieval of all Event Producers for a Tenant
@@ -134,7 +137,7 @@ class EventProducersResource(api.ApiResource):
         event_producer_name = body['name']
         event_producer_pattern = body['pattern']
 
-        #if durable or encrypted aren't specified, set to False
+        # if durable or encrypted aren't specified, set to False
         if 'durable' in body.keys():
             event_producer_durable = body['durable']
         else:
@@ -175,6 +178,7 @@ class EventProducersResource(api.ApiResource):
 
 
 class EventProducerResource(api.ApiResource):
+
     """
     EventProducer Resource allows for the retrieval and update of a
     specified Event Producer for a Tenant.
@@ -186,13 +190,13 @@ class EventProducerResource(api.ApiResource):
         Retrieve a specified Event Producer from a Tenant
         when an HTTP GET is received
         """
-        #verify the tenant exists
+        # verify the tenant exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
 
         if not tenant:
             _tenant_not_found()
 
-        #verify the event_producer exists and belongs to the tenant
+        # verify the event_producer exists and belongs to the tenant
         event_producer = tenant_util.find_event_producer(
             tenant, producer_id=event_producer_id)
         if not event_producer:
@@ -212,21 +216,21 @@ class EventProducerResource(api.ApiResource):
 
         body = validated_body['event_producer']
 
-        #verify the tenant exists
+        # verify the tenant exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
 
         if not tenant:
             _tenant_not_found()
 
-        #verify the event_producer exists and belongs to the tenant
+        # verify the event_producer exists and belongs to the tenant
         event_producer = tenant_util.find_event_producer(
             tenant, producer_id=event_producer_id)
         if not event_producer:
             _producer_not_found()
 
-        #if a key is present, update the event_producer with the value
+        # if a key is present, update the event_producer with the value
         if 'name' in body.keys() and event_producer.name != body['name']:
-            #if the tenant already has a profile with this name then abort
+            # if the tenant already has a profile with this name then abort
             duplicate_producer = tenant_util.find_event_producer(
                 tenant,  producer_name=body['name'])
             if duplicate_producer:
@@ -249,7 +253,7 @@ class EventProducerResource(api.ApiResource):
         if 'sinks' in body:
             event_producer.sinks = body['sinks']
 
-        #save the tenant document
+        # save the tenant document
         tenant_util.save_tenant(tenant)
 
         resp.status = falcon.HTTP_200
@@ -260,13 +264,13 @@ class EventProducerResource(api.ApiResource):
         Delete a specified Event Producer from a Tenant's configuration
         when an HTTP DELETE is received
         """
-        #verify the tenant exists
+        # verify the tenant exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
 
         if not tenant:
             _tenant_not_found()
 
-        #verify the event_producer exists and belongs to the tenant
+        # verify the event_producer exists and belongs to the tenant
         event_producer = tenant_util.find_event_producer(
             tenant, producer_id=event_producer_id)
         if not event_producer:
@@ -278,6 +282,7 @@ class EventProducerResource(api.ApiResource):
 
 
 class TokenResource(api.ApiResource):
+
     """
     The Token Resource manages Tokens for a tenant
     and provides validation operations.
@@ -290,10 +295,10 @@ class TokenResource(api.ApiResource):
         when an HTTP HEAD call is received
         """
 
-        #get message token, or abort if token is not in header
+        # get message token, or abort if token is not in header
         message_token = req.get_header(MESSAGE_TOKEN, required=True)
 
-        #verify the tenant exists
+        # verify the tenant exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
 
         if not tenant:
@@ -311,7 +316,7 @@ class TokenResource(api.ApiResource):
         when an HTTP GET call is received
         """
 
-        #verify the tenant exists
+        # verify the tenant exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
 
         if not tenant:
@@ -325,15 +330,15 @@ class TokenResource(api.ApiResource):
         Tokens are giving a minimum time limit between resets.  This private
         method validates that the time limit has been reached.
         """
-        #get the token create time and the current time as datetime objects
+        # get the token create time and the current time as datetime objects
         token_created = parse_isotime(token.last_changed)
         current_time = parse_isotime(isotime(subsecond=True))
 
-        #get a datetime.timedelta object that represents the difference
+        # get a datetime.timedelta object that represents the difference
         time_diff = current_time - token_created
         hours_diff = time_diff.total_seconds() / 3600
 
-        #if the time limit has not been reached, abort and alert the caller
+        # if the time limit has not been reached, abort and alert the caller
         if hours_diff < MIN_TOKEN_TIME_LIMIT_HRS:
             _token_time_limit_not_reached()
 
@@ -350,7 +355,7 @@ class TokenResource(api.ApiResource):
 
         body = validated_body['token']
 
-        #verify the tenant exists
+        # verify the tenant exists
         tenant = tenant_util.find_tenant(tenant_id=tenant_id)
 
         if not tenant:
@@ -359,14 +364,14 @@ class TokenResource(api.ApiResource):
         invalidate_now = body['invalidate_now']
 
         if invalidate_now:
-            #immediately invalidate the token
+            # immediately invalidate the token
             tenant.token.reset_token_now()
 
         else:
             self._validate_token_min_time_limit_reached(tenant.token)
             tenant.token.reset_token()
 
-        #save the tenant document
+        # save the tenant document
         tenant_util.save_tenant(tenant)
 
         resp.status = falcon.HTTP_203

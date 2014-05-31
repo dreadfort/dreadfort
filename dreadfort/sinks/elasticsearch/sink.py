@@ -52,7 +52,7 @@ def _queue_index_request(index, doc_type, document, ttl=TTL):
     places a message index request on the queue
     """
 
-    #create the metadata for index operation
+    # create the metadata for index operation
     action = {
         '_index': index,
         '_type': doc_type,
@@ -61,7 +61,7 @@ def _queue_index_request(index, doc_type, document, ttl=TTL):
         '_source': document
     }
 
-    #publish the message
+    # publish the message
     with producers[connection].acquire(block=True) as producer:
         producer.publish(action, routing_key=ELASTICSEARCH_QUEUE,
                          serializer='json', declare=[es_queue])
@@ -134,10 +134,12 @@ def flush_to_es():
 
 
 class ElasticSearchStreamBulker(object):
+
     """
     Controls a mutliprocess pool that pulls a message stream from a queue and
     bulk flushes to elasticsearch
     """
+
     def __init__(self, bulk_size=BULK_SIZE):
         self.bulk_size = bulk_size
 

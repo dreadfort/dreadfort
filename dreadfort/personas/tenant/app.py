@@ -19,10 +19,10 @@ _LOG = env.get_logger(__name__)
 
 
 def start_up():
-    #Common Resource(s)
+    # Common Resource(s)
     versions = VersionResource()
 
-    #Tenant Resources
+    # Tenant Resources
     tenant = TenantResource()
     user = UserResource()
     event_producers = EventProducersResource()
@@ -50,7 +50,7 @@ def start_up():
         },
     }
 
-    #include blank argument to celery in order for beat to start correctly
+    # include blank argument to celery in order for beat to start correctly
     celery_proc = Process(target=celery.worker_main, args=[['', '--beat']])
     celery_proc.start()
     _LOG.info(

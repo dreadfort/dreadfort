@@ -12,6 +12,7 @@ def suite():
 
 
 class WhenTestingSysAssist(unittest.TestCase):
+
     def setUp(self):
         self.conf = MagicMock()
         self.conf.network_interface.default_ifname = 'eth1'

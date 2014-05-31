@@ -11,6 +11,7 @@ def suite():
 
 
 class WhenTestingEsDataSourceHandler(unittest.TestCase):
+
     def setUp(self):
         self.conf = MagicMock()
         self.conf = MagicMock()
@@ -31,7 +32,7 @@ class WhenTestingEsDataSourceHandler(unittest.TestCase):
         }
 
     def test_constructor(self):
-        #test es_handler constructor with no bulk off
+        # test es_handler constructor with no bulk off
         self.assertEqual(
             self.es_handler.es_servers,
             [{'host': 'localhost', 'port': '9200'}]
@@ -49,7 +50,7 @@ class WhenTestingEsDataSourceHandler(unittest.TestCase):
         with self.assertRaises(es.ElasticsearchHandlerError):
             self.es_handler._check_connection()
 
-        #test that a status of  STATUS_CONNECTED  does not raise an exception
+        # test that a status of  STATUS_CONNECTED  does not raise an exception
         handler_error_raised = False
         try:
             self.es_handler.status = self.es_handler.STATUS_CONNECTED
@@ -114,6 +115,7 @@ class WhenTestingEsDataSourceHandler(unittest.TestCase):
 
 
 class WhenTestingGetHandler(unittest.TestCase):
+
     def setUp(self):
         self.connect_method = MagicMock()
 

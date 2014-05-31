@@ -50,12 +50,12 @@ def bootstrap_api():
 
     personality_module = 'dreadfort.personas.{0}.app'.format(PERSONALITY)
     _LOG.info('loading default personality module: {0}'
-        .format(personality_module))
+              .format(personality_module))
 
-    #load the personality module as a plug in
+    # load the personality module as a plug in
     plugin_mod = import_module(personality_module)
 
-    #start up the api from the specified personality_module
+    # start up the api from the specified personality_module
     return plugin_mod.start_up()
 
 application = bootstrap_api()

@@ -16,14 +16,14 @@ _LOG = env.get_logger(__name__)
 
 
 def start_up():
-    #Common Resource(s)
+    # Common Resource(s)
     versions = VersionResource()
 
-    #Coordinator Resources
+    # Coordinator Resources
     workers_status = WorkersStatusResource()
     worker_status = WorkerStatusResource()
 
-    #Tenant Resources
+    # Tenant Resources
     tenant = TenantResource()
     user = UserResource()
     event_producers = EventProducersResource()

@@ -20,6 +20,7 @@ import weakref
 
 
 class WeakLocal(threading.local):
+
     def __getattribute__(self, attr):
         rval = super(WeakLocal, self).__getattribute__(attr)
         if rval:

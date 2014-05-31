@@ -10,6 +10,7 @@ def suite():
 
 
 class WhenTestingMongoDataSourceHandler(unittest.TestCase):
+
     def setUp(self):
         self.conf = MagicMock()
 
@@ -32,7 +33,7 @@ class WhenTestingMongoDataSourceHandler(unittest.TestCase):
         with self.assertRaises(mongodb.MongoDBHandlerError):
             self.mongo_handler._check_connection()
 
-        #test that a status of  STATUS_CONNECTED  does not raise an exception
+        # test that a status of  STATUS_CONNECTED  does not raise an exception
         handler_error_raised = False
         try:
             self.mongo_handler.status = self.mongo_handler.STATUS_CONNECTED
@@ -237,6 +238,7 @@ class WhenTestingMongoDataSourceHandler(unittest.TestCase):
 
 
 class WhenTestingGetHandler(unittest.TestCase):
+
     def setUp(self):
         self.connect_method = MagicMock()
 

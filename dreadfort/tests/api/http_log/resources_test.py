@@ -17,6 +17,7 @@ def suite():
 
 
 class WhenTestingPublishMessage(testing.TestBase):
+
     def before(self):
         self.resource = PublishMessageResource()
         self.tenant_id = '1234'

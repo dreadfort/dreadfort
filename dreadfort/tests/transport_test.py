@@ -19,14 +19,14 @@ class WhenTestingZeroMqReceiver(unittest.TestCase):
         self.zmq_mock = MagicMock()
         self.zmq_mock.PULL = transport.zmq.PULL
 
-        #set up the mock of the socket object
+        # set up the mock of the socket object
         self.socket_mock = MagicMock()
-        #create a mock for the zmq context object
+        # create a mock for the zmq context object
         self.context_mock = MagicMock()
-        #have the mock context object return the mock socket
+        # have the mock context object return the mock socket
         # when the context.socket() method is called
         self.context_mock.socket.return_value = self.socket_mock
-        #have the mock zmq module return the mocked context object
+        # have the mock zmq module return the mocked context object
         # when the Context() constructor is called
         self.zmq_mock.Context.return_value = self.context_mock
 
@@ -93,11 +93,13 @@ class WhenTestingReceiverFactory(unittest.TestCase):
 
 
 class WhenTestingZeroMQInputServer(unittest.TestCase):
+
     def setUp(self):
         self.receiver_mock = MagicMock()
 
-        #create a test class from the base class and override process_msg
+        # create a test class from the base class and override process_msg
         class TestInputServer(transport.ZeroMQInputServer):
+
             def process_msg(self):
                 self.test_stop = self._stop
                 self.process_msg_called = True
@@ -137,14 +139,14 @@ class WhenTestingZeroMqCaster(unittest.TestCase):
         self.zmq_mock = MagicMock()
         self.zmq_mock.PUSH = transport.zmq.PUSH
 
-        #set up the mock of the socket object
+        # set up the mock of the socket object
         self.socket_mock = MagicMock()
-        #create a mock for the zmq context object
+        # create a mock for the zmq context object
         self.context_mock = MagicMock()
-        #have the mock context object return the mock socket
+        # have the mock context object return the mock socket
         # when the context.socket() method is called
         self.context_mock.socket.return_value = self.socket_mock
-        #have the mock zmq module return the mocked context object
+        # have the mock zmq module return the mocked context object
         # when the Context() constructor is called
         self.zmq_mock.Context.return_value = self.context_mock
 
@@ -205,6 +207,7 @@ class WhenIntegrationTestingTransport(unittest.TestCase):
         self.receiver = transport.ZeroMQReceiver(self.connect_host_tuples)
 
         class TestInputServer(transport.ZeroMQInputServer):
+
             def process_msg(self):
                 self.test_stop = self._stop
                 self.process_msg_called = True

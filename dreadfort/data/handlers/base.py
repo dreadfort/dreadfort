@@ -2,15 +2,18 @@ import abc
 
 
 class DataHandlerError(Exception):
+
     """
     base class to be used for data handler errors
     """
+
     def __init__(self, msg):
         self.msg = msg
         super(DataHandlerError, self).__init__(self.msg)
 
 
 class DataHandlerBase:
+
     """
     Abstract Base Class for implementing data drivers
     """

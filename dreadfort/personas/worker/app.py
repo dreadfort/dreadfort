@@ -25,10 +25,10 @@ def start_up():
     application = api = falcon.API()
     api.add_route('/', VersionResource())
 
-    #http correlation endpoint
+    # http correlation endpoint
     api.add_route('/v1/tenant/{tenant_id}/publish', PublishMessageResource())
 
-    #syslog correlation endpoint
+    # syslog correlation endpoint
     server = receiver.new_correlation_input_server()
 
     server_proc = Process(target=server.start)
@@ -46,7 +46,7 @@ def start_up():
         },
     }
 
-    #include blank argument to celery in order for beat to start correctly
+    # include blank argument to celery in order for beat to start correctly
     celery_proc = Process(target=celery.worker_main, args=[['', '--beat']])
     celery_proc.start()
     _LOG.info(

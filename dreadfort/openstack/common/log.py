@@ -169,6 +169,7 @@ try:
     NullHandler = logging.NullHandler
 except AttributeError:  # NOTE(jkoelker) NullHandler added in Python 2.7
     class NullHandler(logging.Handler):
+
         def handle(self, record):
             pass
 
@@ -213,6 +214,7 @@ class BaseLoggerAdapter(logging.LoggerAdapter):
 
 
 class LazyAdapter(BaseLoggerAdapter):
+
     def __init__(self, name='unknown', version='unknown'):
         self._logger = None
         self.extra = {}
@@ -275,6 +277,7 @@ class ContextAdapter(BaseLoggerAdapter):
 
 
 class JSONFormatter(logging.Formatter):
+
     def __init__(self, fmt=None, datefmt=None):
         # NOTE(jkoelker) we ignore the fmt argument, but its still there
         # since logging.config.fileConfig passes it.
@@ -359,9 +362,8 @@ def setup(product_name):
 
 
 def set_defaults(logging_context_format_string):
-    cfg.set_defaults(log_opts,
-                     logging_context_format_string=
-                     logging_context_format_string)
+    cfg.set_defaults(
+        log_opts, logging_context_format_string=logging_context_format_string)
 
 
 def _find_facility_from_conf():
@@ -467,6 +469,7 @@ once it is created.
 
 
 class WritableLogger(object):
+
     """A thin wrapper that responds to `write` and logs."""
 
     def __init__(self, logger, level=logging.INFO):
@@ -478,6 +481,7 @@ class WritableLogger(object):
 
 
 class ContextFormatter(logging.Formatter):
+
     """A context.RequestContext aware formatter configured through flags.
 
 The flags used to set format strings are: logging_context_format_string

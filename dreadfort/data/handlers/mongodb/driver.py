@@ -7,7 +7,7 @@ from dreadfort import env
 
 _LOG = env.get_logger(__name__)
 
-#Register options for MongoDB
+# Register options for MongoDB
 mongodb_group = cfg.OptGroup(
     name="mongodb", title='MongoDB Configuration Options')
 config.get_config().register_group(mongodb_group)

@@ -13,6 +13,7 @@ from dreadfort.data.model.worker import Worker
 
 
 class WorkerStatusResource(api.ApiResource):
+
     """
     A resource for updating and retrieving data for a single worker node
     """
@@ -24,16 +25,16 @@ class WorkerStatusResource(api.ApiResource):
         updates a worker's status or creates a new worker entry if not found
         """
 
-        #load validated json payload in body
+        # load validated json payload in body
         body = validated_body['worker_status']
 
-        #find the worker in db
+        # find the worker in db
         worker = worker_util.find_worker(hostname)
 
         if worker is None:
-            #instantiate new worker object
+            # instantiate new worker object
             new_worker = Worker(**body)
-            #persist the new worker
+            # persist the new worker
             worker_util.create_worker(new_worker)
             resp.status = falcon.HTTP_202
             return
@@ -52,7 +53,7 @@ class WorkerStatusResource(api.ApiResource):
         """
         Retrieve the status of a specified worker node
         """
-        #find the worker in db
+        # find the worker in db
         worker = worker_util.find_worker(hostname)
 
         if worker is None:
@@ -63,8 +64,10 @@ class WorkerStatusResource(api.ApiResource):
 
 
 class WorkersStatusResource(api.ApiResource):
+
     """
-    A resource for retrieving data about all worker nodes in a dreadfort cluster
+    A resource for retrieving data about all worker
+    nodes in a dreadfort cluster
     """
 
     @api.handle_api_exception(operation_name='WorkersStatus GET')

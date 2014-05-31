@@ -23,8 +23,8 @@ def find_tenant(tenant_id, create_on_missing=False):
     tenant = retrieve_tenant(tenant_id)
 
     if tenant is None:
-    #if the create_on_missing parameter us set, create the new tenant,
-    # then retrieve it from the data store and return
+        # if the create_on_missing parameter us set, create the new tenant,
+        # then retrieve it from the data store and return
         if create_on_missing:
             create_tenant(tenant_id)
             tenant = retrieve_tenant(tenant_id)
@@ -36,16 +36,16 @@ def create_tenant(tenant_id, tenant_name=None):
     """
     Creates a new tenant and and persists to the datastore
     """
-    #create new token for the tenant
+    # create new token for the tenant
     new_token = Token()
     new_tenant = Tenant(tenant_id, new_token, tenant_name=tenant_name)
 
-    #save the new tenant to the datastore
+    # save the new tenant to the datastore
     _db_handler.put('tenant', new_tenant.format())
-    #create a new sequence for the tenant for creation of IDs on child objects
+    # create a new sequence for the tenant for creation of IDs on child objects
     _db_handler.create_sequence(new_tenant.tenant_id)
 
-    #create an index for the tenant in the default sink
+    # create an index for the tenant in the default sink
     # and enables time to live for the default doc_type
     mapping_tasks.create_index.delay(tenant_id)
 
@@ -55,7 +55,7 @@ def retrieve_tenant(tenant_id):
     Retrieve the specified tenant form the datastore
     """
     tenant_dict = _db_handler.find_one('tenant', {'tenant_id': tenant_id})
-    #return the tenant object
+    # return the tenant object
     if tenant_dict:
         return load_tenant_from_dict(tenant_dict)
 
@@ -81,18 +81,18 @@ def create_event_producer(tenant, name, pattern, durable, encrypted, sinks):
         durable,
         encrypted,
         sinks)
-    #add the event_producer to the tenant
+    # add the event_producer to the tenant
     tenant.event_producers.append(new_event_producer)
-    #save the tenant's data
+    # save the tenant's data
     save_tenant(tenant)
 
-    #create a new mapping for the producer in the default
+    # create a new mapping for the producer in the default
     # sink to enable time_to_live
     mapping_tasks.create_ttl_mapping.delay(
         tenant_id=tenant.tenant_id,
         producer_pattern=new_event_producer.pattern)
 
-    #return the id of the newly created producer
+    # return the id of the newly created producer
     return new_event_producer.get_id()
 
 
@@ -101,9 +101,9 @@ def delete_event_producer(tenant, event_producer):
     Removes a specified Event producer from the tenant object, and updates
     the tenant in the datastore
     """
-    #remove any references to the event producer being deleted
+    # remove any references to the event producer being deleted
     tenant.event_producers.remove(event_producer)
-    #save the tenant document
+    # save the tenant document
     save_tenant(tenant)
 
 

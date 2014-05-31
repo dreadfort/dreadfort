@@ -23,7 +23,7 @@ def http_request(url, add_headers=None, json_payload='{}', http_verb='GET',
         headers.update(add_headers)
     http_verb = str(http_verb).upper()
 
-    if not http_verb in HTTP_VERBS:
+    if http_verb not in HTTP_VERBS:
         raise ValueError(
             'Invalid HTTP verb supplied: {0}'.format(http_verb))
 

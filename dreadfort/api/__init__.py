@@ -7,6 +7,7 @@ _LOG = env.get_logger(__name__)
 
 
 class ApiResource(object):
+
     """
     Base class for API resources
     """

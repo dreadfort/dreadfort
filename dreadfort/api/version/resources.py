@@ -5,6 +5,7 @@ from dreadfort.api import format_response_body
 
 
 class VersionResource(ApiResource):
+
     """ Return the current version of the API """
 
     def on_get(self, req, resp):

@@ -119,7 +119,9 @@ def install(domain, lazy=False):
 
 
 class Message(_userString.UserString, object):
+
     """Class used to encapsulate translatable messages."""
+
     def __init__(self, msg, domain):
         # _msg is the gettext msgid and should never change
         self._msg = msg
@@ -337,6 +339,7 @@ def get_localized_message(message, user_locale):
 
 
 class LocaleHandler(logging.Handler):
+
     """Handler that can have a locale associated to translate Messages.
 
     A quick example of how to utilize the Message class above.

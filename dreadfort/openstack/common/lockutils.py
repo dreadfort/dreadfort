@@ -50,6 +50,7 @@ def set_defaults(lock_path):
 
 
 class _InterProcessLock(object):
+
     """Lock implementation which allows multiple locks, working around
 issues like bugs.debian.org/cgi-bin/bugreport.cgi?bug=632857 and does
 not require any cleanup. Since the lock is always held on a file
@@ -106,6 +107,7 @@ so lock files must be accessed only using this abstraction.
 
 
 class _WindowsLock(_InterProcessLock):
+
     def trylock(self):
         msvcrt.locking(self.lockfile.fileno(), msvcrt.LK_NBLCK, 1)
 
@@ -114,6 +116,7 @@ class _WindowsLock(_InterProcessLock):
 
 
 class _PosixLock(_InterProcessLock):
+
     def trylock(self):
         fcntl.lockf(self.lockfile, fcntl.LOCK_EX | fcntl.LOCK_NB)
 

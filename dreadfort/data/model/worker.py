@@ -11,10 +11,12 @@ from dreadfort.openstack.common import timeutils
 
 
 class Worker(object):
+
     """
     Class that represents the data structure of worker node in a dreadfort
     cluster.  The data contains basic identification and system info.
     """
+
     def __init__(self, personality='worker', **kwargs):
         """
         The init function accepts **kwargs so that a Worker object can be
@@ -75,9 +77,11 @@ class Worker(object):
 
 
 class SystemInfo(object):
+
     """
     A class defining the data structure for system stats for a worker node.
     """
+
     def __init__(self, **kwargs):
         """
         An object can be initialized by passing in a dictionary representation
@@ -117,9 +121,11 @@ class SystemInfo(object):
 
 
 class WorkerConfiguration(object):
+
     """
     The class defines a data structure for a worker's configuration info.
     """
+
     def __init__(self, personality, hostname, coordinator_uri):
 
         self.personality = personality

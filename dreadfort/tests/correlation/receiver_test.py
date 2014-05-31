@@ -11,6 +11,7 @@ _LOG = env.get_logger(__name__)
 
 
 class WhenTestingCorrelationInputServer(unittest.TestCase):
+
     def setUp(self):
         self.conf = MagicMock()
         self.conf.worker_id = '12345'

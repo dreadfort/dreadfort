@@ -8,7 +8,7 @@ from dreadfort import env
 _LOG = env.get_logger(__name__)
 
 
-#Register options for Elasticsearch
+# Register options for Elasticsearch
 elasticsearch_group = cfg.OptGroup(
     name="elasticsearch",
     title='Elasticsearch Configuration Options')
@@ -62,7 +62,7 @@ class ElasticsearchHandler(base.DataHandlerBase):
         self.es_servers = [{
             "host": server.split(":")[0],
             "port": server.split(":")[1]
-            } for server in conf.servers
+        } for server in conf.servers
         ]
 
         if conf.bulk_size < 1:

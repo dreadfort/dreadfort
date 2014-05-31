@@ -7,6 +7,7 @@ except ImportError:
 
 
 class NativeProxy(object):
+
     def __init__(self):
         self.server = uwsgi
         self.UWSGI = UWSGI
