@@ -1,3 +1,5 @@
+billiard
+kombu
 simplejson
 falcon
 wsgiref

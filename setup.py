@@ -13,7 +13,7 @@ def read(relative):
 
 
 setup(
-    name='meniscus',
+    name='dreadfort',
     version=read('VERSION')[0],
     description='',
     author='Project Meniscus',
