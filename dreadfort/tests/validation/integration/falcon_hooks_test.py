@@ -16,7 +16,7 @@ from dreadfort.validation.integration.falcon_hooks import validation_hook
 class SchemaMock(SchemaLoader):
 
     _SCHEMA = {
-        'id': 'http://projectmeniscus.org/json/worker_configuration#',
+        'id': 'http://projectdreadfort.org/json/worker_configuration#',
         'type': 'object',
         'additionalProperties': False,
 

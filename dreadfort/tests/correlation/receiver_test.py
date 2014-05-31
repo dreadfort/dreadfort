@@ -17,7 +17,7 @@ class WhenTestingCorrelationInputServer(unittest.TestCase):
         self.tenant_id = '5164b8f4-16fb-4376-9d29-8a6cbaa02fa9'
         self.token = '87324559-33aa-4534-bfd1-036472a32f2e'
         self.src_msg = {
-            "profile": "http://projectmeniscus.org/cee/profiles/base",
+            "profile": "http://projectdreadfort.org/cee/profiles/base",
             "version": "1",
             "messageid": "-",
             "priority": "46",
@@ -42,7 +42,7 @@ class WhenTestingCorrelationInputServer(unittest.TestCase):
             }
         }
         self.correlated_message = {
-            "profile": "http://projectmeniscus.org/cee/profiles/base",
+            "profile": "http://projectdreadfort.org/cee/profiles/base",
             "ver": "1",
             "msgid": "-",
             "pri": "46",

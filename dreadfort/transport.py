@@ -1,6 +1,6 @@
 """
 The transport module defines the classes that serve as the transport layer for
-Meniscus when passing log messages between nodes.  ZeroMQ is used as the
+dreadfort when passing log messages between nodes.  ZeroMQ is used as the
 transport mechanism.
 """
 

@@ -1,6 +1,6 @@
 """
 This Module contains classes that define different data structures used to
-represent meniscus worker nodes and their registration, configuration, and
+represent dreadfort worker nodes and their registration, configuration, and
 system status.
 """
 

@@ -1,5 +1,5 @@
 {
-    "id": "http://projectmeniscus.org/json/worker_configuration#",
+    "id": "http://projectdreadfort.org/json/worker_configuration#",
     "$schema": "http://json-schema.org/draft-04/schema#",
     "description": "Worker Configuration Schema",
 

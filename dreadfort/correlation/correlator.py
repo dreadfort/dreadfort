@@ -138,9 +138,9 @@ def _format_message_cee(message):
         }
     """
     try:
-        meniscus_sd = message['_SDATA']['dreadfort']
-        tenant_id = meniscus_sd['tenant']
-        message_token = meniscus_sd['token']
+        dreadfort_sd = message['_SDATA']['dreadfort']
+        tenant_id = dreadfort_sd['tenant']
+        message_token = dreadfort_sd['token']
 
     #if there is a key error then the syslog message did
     #not contain necessary credential information
