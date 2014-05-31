@@ -1,5 +1,5 @@
 #!/bin/sh
-# postrm script for meniscus
+# postrm script for dreadfort
 #
 # see: dh_installdeb(1)
 
@@ -21,19 +21,19 @@ set -e
 
 case "$1" in
 	purge)
-        echo "Purging meniscus..." >&2
-        if (getent passwd meniscus) > /dev/null 2>&1; then
-            userdel meniscus || true
+        echo "Purging dreadfort..." >&2
+        if (getent passwd dreadfort) > /dev/null 2>&1; then
+            userdel dreadfort || true
         fi
 
-        if (getent group meniscus) > /dev/null 2>&1; then
-            groupdel meniscus || true
+        if (getent group dreadfort) > /dev/null 2>&1; then
+            groupdel dreadfort || true
         fi
 
-        [ -e /var/lib/meniscus ] && rm -rf /var/lib/meniscus
-        [ -e /var/log/meniscus ] && rm -rf /var/log/meniscus
-        [ -e /usr/share/meniscus ] && rm -rf /usr/share/meniscus
-        [ -e /etc/meniscus ] && rm -rf /etc/meniscus
+        [ -e /var/lib/dreadfort ] && rm -rf /var/lib/dreadfort
+        [ -e /var/log/dreadfort ] && rm -rf /var/log/dreadfort
+        [ -e /usr/share/dreadfort ] && rm -rf /usr/share/dreadfort
+        [ -e /etc/dreadfort ] && rm -rf /etc/dreadfort
 	;;
 
     upgrade|failed-upgrade|abort-upgrade)
@@ -41,7 +41,7 @@ case "$1" in
     ;;
 
     remove|abort-install|disappear)
-        [ -e /usr/share/meniscus ] && rm -rf /usr/share/meniscus
+        [ -e /usr/share/dreadfort ] && rm -rf /usr/share/dreadfort
     ;;
 
     *)

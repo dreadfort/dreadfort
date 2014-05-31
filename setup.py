@@ -13,10 +13,10 @@ def read(relative):
 
 
 setup(
-    name='meniscus',
+    name='dreadfort',
     version=read('VERSION')[0],
     description='',
-    author='Project Meniscus',
+    author='Dreadfort',
     author_email='',
     tests_require=read('./tools/test-requires'),
     install_requires=read('./tools/pip-requires'),

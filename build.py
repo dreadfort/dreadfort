@@ -165,7 +165,7 @@ def call_hook(name, stage, stage_hooks, **kwargs):
 def read_requires(filename, bctx, pkg_index, hooks):
     lines = open(filename, 'r').read()
 
-    ## TODO: Handle this exception better
+    # TODO: Handle this exception better
     if not lines:
         raise Exception()
 
