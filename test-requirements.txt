@@ -1,8 +1,8 @@
+httpretty
 mock
 nose
 nosexcover
-testtools
-httpretty
-tox
 ordereddict
 six
+testtools
+tox
