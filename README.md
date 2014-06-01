@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/dreadfort/dreadfort.svg?branch=master)](https://travis-ci.org/dreadfort/dreadfort)
 
 # Dreadfort
 
